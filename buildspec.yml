@@ -11,7 +11,7 @@ phases:
       - docker run -p 7070:5432 --name postgres-sample -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=todo -d postgres
       - mvn install
       - echo Logging in to Amazon ECR
-      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION | sed 's|https://||')
   build:
     commands:
       - echo Build started on `date`
